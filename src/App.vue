@@ -24,5 +24,10 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+  --verde: #59886b;
+  --rosso: #c05555;
+  --panna: #fff8c1;
+  --bianco: #ffffff;
+  
 }
 </style>
