@@ -1,17 +1,15 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <AppFooter />
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+import AppFooter from './components/AppFooter'
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    AppFooter
   }
 }
 </script>
@@ -23,11 +21,17 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  height: 100vh;
+}
+
+body{
   --verde: #59886b;
   --rosso: #c05555;
   --panna: #fff8c1;
-  --bianco: #ffffff;
-  
+  --bianco: #ffffff; 
+  background-color: var(--verde);
+  margin: 0;
+  padding: 0;
+  height: 100vh;
 }
 </style>
