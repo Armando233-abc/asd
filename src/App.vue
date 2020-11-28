@@ -1,15 +1,18 @@
 <template>
   <div id="app">
     <AppFooter />
+    <Tabellone />
   </div>
 </template>
 
 <script>
 import AppFooter from './components/AppFooter'
+import Tabellone from './components/Tabellone'
 export default {
   name: 'App',
   components: {
-    AppFooter
+    AppFooter,
+    Tabellone
   }
 }
 </script>
