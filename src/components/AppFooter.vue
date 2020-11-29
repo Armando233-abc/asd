@@ -2,9 +2,10 @@
 
 <template>
     <footer>
-        <tab emoji="🎅" testo="Cartellone" />
-        <tab emoji="🎄" testo="Cartella Singola" />
+        <tab emoji="🎅" testo="Estrazione" />
+        <tab emoji="🎄" testo="Cartellone" />
         <tab emoji="⚙" testo="Impostazioni" />
+        <tab emoji="" testo="tabellone"></tab>
     </footer>
 </template>
 
@@ -13,7 +14,8 @@ import Tab from './Tab'
 export default{
     name : "AppFooter",
     components: { Tab },
-}
+
+        Tab}
 </script>
 
 
@@ -25,7 +27,7 @@ export default{
         width: 100vw;
         bottom: 0;
         display: grid;
-        grid-template-columns: 1fr 2fr 1fr;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
     }
 
 </style>

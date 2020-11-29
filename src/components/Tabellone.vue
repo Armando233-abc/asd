@@ -1,49 +1,123 @@
 <template>
-    <div>
-        <h1>{{ isNaN(estratto)? '-': estratto}}</h1>
-        <h2>{{ voce === ""? "-" : voce["napoletano"]}}</h2>
-        <h3>{{ voce === ""? "-" : voce["italiano"]}}</h3>
-        <div>{{lista_estratti.length}}</div>
-        <button @click="estrai()">Estrai</button>
-        <ul>
-            <li v-for="(numero, indice) in lista_estratti" :key="indice">{{numero}}</li>
-        </ul>
+    <div class="tabellone">
+        
+        <header>
+            <h1>{{ isNaN(estratto) ? '-': estratto}}</h1>
+            <h2>{{ voce === "" ? "-" : voce["napoletano"] }}</h2>
+            <h3>{{ voce === "" ? "-" : voce["italiano"] }}</h3>
+        </header>
+        
+        <button class="panariello" @click="estrai()">
+            <img :class="[ 'animate__wobble', animazione ? 'animate__animated animate__infinite': '']" src="../assets/panariello.png" alt="">
+        </button>
+        
+        <!--ul class="estratti">
+            <li class="estratto" v-for="(numero, i) in listaEstratti" :key="i">{{numero}}</li>
+        </ul-->
     </div>
-    
 </template>
-
 
 <script>
 import Smorfia from '../dependences/tombola-api/smorfia.json'
-
 export default {
-    name: "Tabellone",
+    name: 'Tabellone',
     data(){
         return {
-            estratto : NaN, //Not a Number
-            voce : "",
-            lista_estratti : []
+            animazione: false,
+            estratto: NaN,
+            voce: "",
+            listaEstratti : []
         }
     },
-    methods : {
-        estrai(){
-            if (this.lista_estratti.length < 90){
-                let numero = Math.floor(Math.random() * 90 + 1)
-                while (this.lista_estratti.includes(numero)){
-                    numero = Math.floor(Math.random() * 90 + 1)
-                }
-                this.estratto = numero
-                this.voce = Smorfia[numero.toString()]
-                this.lista_estratti.push(numero)
-                let italiano = Smorfia[numero.toString()]["italiano"]
-                let frase = new SpeechSynthesisUtterance(italiano)
-                speechSynthesis.speak(frase)
+    methods: {
+      estrai(){
+        this.animazione = true
+        setTimeout(()=> this.animazione = false, 1*1000)
+
+        if (this.listaEstratti.length < 90){
+            let numero = Math.floor(Math.random() * 90 + 1)
+            while (this.listaEstratti.includes(numero)){
+                numero = Math.floor(Math.random() * 90 + 1)
             }
+            this.estratto = numero
+            this.voce = Smorfia[numero.toString()]
+            this.listaEstratti.unshift(numero)
+            let voce = Smorfia[numero.toString()]
+            let frase = new SpeechSynthesisUtterance()
+            frase.text = voce.napoletano
+            //speechSynthesis.speak(frase)
         }
+          
+      }
+     
     }
 }
 </script>
 
 <style>
+@import url('https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css');
+header{
+    display: grid;
+    grid-template-rows: 1fr;
+    place-items: center;
+}
+.panariello{
+    background: transparent;
+    outline: none !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+.panariello img{
+    width: 250px;
+    --animate-duration: 1s;
+}
+.tabellone{
+    display: grid;
+    grid-template-rows: repeat(3, 1fr);
+    height: 100vh;
+}
+h1, h2, h3{
+    margin: 0;
+}
+.estratti{
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: repeat(9, 1fr);
+    row-gap: 5px;
+    column-gap: 5px;
+    padding: 0;
+    min-width: 336px;
+}
 
+h1,
+.estratto{
+    --dim : 42px;
+    padding: 3px;
+    height: var(--dim);
+    width: var(--dim);
+    background-color: var(--panna);
+    color: var(--rosso);
+    border: 4px solid var(--rosso);
+    border-radius: 50%;
+    box-sizing: border-box;
+    place-content: center;
+    display: grid;
+    place-content: center;
+    display: grid;
+    font-weight: 700;
+    box-shadow: inset 0px 1px 1px 1px rgba(0,0,0,0.5);
+    text-shadow: -1px 1px 1px rgba(0,0,0,0.5);
+}
+
+h1{
+    --dim : 72px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    border-width: 6px;
+}
+
+h2, h3{
+    color: white;
+}
 </style>
